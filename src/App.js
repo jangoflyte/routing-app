@@ -1,9 +1,11 @@
 import logo from './logo.svg';
 import React, {useState, useEffect, useContext} from 'react';
-import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate} from 'react-router-dom';
 import './App.css';
 import styles from './Button.module.css';
 import styled from 'styled-components';
+import {Card, CardMedia} from '@mui/material';
+// import {makeStyles} from '@mui/styles';
 
 const UserContext = React.createContext({user: {}, setUser: () => {}});
 
