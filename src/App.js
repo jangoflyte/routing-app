@@ -1,9 +1,23 @@
-// import logo from './logo.svg';
+import logo from './logo.svg';
 import React, {useState, useEffect, useContext} from 'react';
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
+import styles from './Button.module.css';
+import styled from 'styled-components';
 
 const UserContext = React.createContext({user: {}, setUser: () => {}});
+
+const Button = styled.button`
+    background: black;
+    border-radius: 2px;
+    color: white;
+    background-color: ${props => props.theme === 'light' ? 'white' : 'black'};
+`
+
+const ColoredButton = styled(Button)`
+  background: purple;
+  color: black;
+`
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -32,31 +46,47 @@ const App = () => {
 
   const value = {user, setUser};
   const navigate = useNavigate ();
-  const location = useLocation ();
-  console.log(location);
+  // const location = useLocation ();
+  // console.log(location);
 
   return (
     <>
       <UserContext.Provider value={value}>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/userprofile">User Profile</Link>
-        </li>
-        <li>
-          <Link to="/user">Users</Link>
-        </li>
-      </ul>
-      <button onClick={() => {navigate("/signup", { state: {info:"some info"}})}}>Sign Up</button>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/userprofile" element={<UserProfile />} />
-        <Route path="/user" element={<List list={data}/>} />
-        <Route path="/:userName" element={<Details/>} />
-      </Routes>
+        <div className="App">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <ul>
+              <li>
+                <Link to="/" id="home">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/userprofile">User Profile</Link>
+              </li>
+              <li>
+                <Link to="/user">Users</Link>
+              </li>
+            </ul>
+            <button
+              className={styles.button}
+              onClick={() => {
+                navigate("/signup", { state: { info: "some info" } });
+              }}
+            >
+              Sign Up
+            </button>
+            <Button theme='dark'>Styled Button</Button>
+            <ColoredButton>Colored Button</ColoredButton>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/userprofile" element={<UserProfile />} />
+              <Route path="/user" element={<List list={data} />} />
+              <Route path="/:userName" element={<Details />} />
+            </Routes>
+          </header>
+        </div>
       </UserContext.Provider>
     </>
   );

@@ -1,0 +1,7 @@
+/* ./Button.module.css */
+.button {
+    color: "white";
+    padding: 10%;
+    border: "orange";
+    background-color: "grey";
+}
